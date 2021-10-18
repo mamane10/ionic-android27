@@ -2,7 +2,6 @@ FROM debian:stable-slim
 LABEL El Marchani Abderrahmane <abderrahmaneelmarchani@gmail.com>
 
 ENV NPM_VERSION=6.12.0 \
-    CORDOVA_VERSION=10.0.0 \
     GRADLE_VERSION=7.2 \
     ANDROID_HOME=/opt/android-sdk-linux
 
@@ -21,7 +20,7 @@ RUN apt-get update &&  \
     curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
     apt-get update &&  \
     apt-get install -y nodejs && \
-    npm install -g npm@"$NPM_VERSION" cordova@"$CORDOVA_VERSION" @ionic/cli && \
+    npm install -g npm@"$NPM_VERSION" capacitor @ionic/cli && \
     npm cache clear --force && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
