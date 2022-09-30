@@ -1,7 +1,7 @@
 FROM debian:stable-slim
 LABEL El Marchani Abderrahmane <abderrahmaneelmarchani@gmail.com>
 
-ENV NPM_VERSION=6.12.0 \
+ENV NPM_VERSION=8.1.2 \
     GRADLE_VERSION=7.2 \
     ANDROID_HOME=/opt/android-sdk-linux
 
@@ -17,7 +17,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 # Install basics
 RUN apt-get update &&  \
     apt-get install -y git wget curl unzip build-essential && \
-    curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
+    curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
     apt-get update &&  \
     apt-get install -y nodejs && \
     npm install -g npm@"$NPM_VERSION" capacitor @ionic/cli && \
@@ -47,3 +47,9 @@ RUN (yes | ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-27" >/dev/nul
     (yes | ${ANDROID_HOME}/tools/bin/sdkmanager "build-tools;27.0.3" >/dev/null) && \
     (yes | ${ANDROID_HOME}/tools/bin/sdkmanager "system-images;android-27;google_apis;x86") && \
     (yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses)
+
+# JDK11
+RUN apt-get update && \
+    apt-get install -y openjdk-11-jdk
+
+ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
